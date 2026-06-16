@@ -5,7 +5,7 @@ import { Post } from "./types";
 
 export default function Portfolio() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeImageId, setActiveImageId] = useState(0);
+  const [activePost, setActivePost] = useState({});
 
   const posts: Post[] = [
     { id: 1, imageUrl: "/dz_content/djspike.png", author: "dezeta" },
@@ -20,16 +20,23 @@ export default function Portfolio() {
     },
   ];
 
-  const imageConfigs = {
+  const postConfigs = {
     width: 1012,
     height: 1350
   }
 
-  const openImage = (postId: number) => {
-    setIsOpen(true);
-    setActiveImageId(postId);
+  const openPost = (postId: number) => {
+    //check for post first
+    const postConfig = posts.find((post) => post.id === postId)
+    if(!postConfig){
+      // nothing to open if the post is not found..
+      // graceful result
+      return;
+    }
 
-    console.log("clicked image", posts.find((post) => post.id === postId)?.imageUrl)
+    setIsOpen(true);
+    setActivePost(postConfig);
+    console.log("clicked post", posts.find((post) => post.id === postId)?.imageUrl)
   }
 
   return (
@@ -40,20 +47,21 @@ export default function Portfolio() {
       </p>
       <div className="grid grid-cols-3 gap-1">
         {posts.map((post) => (
-          <div key={post.id} className="cursor-pointer" onClick={() => openImage(post.id)}>
+          <div key={post.id} className="cursor-pointer" onClick={() => openPost(post.id)}>
             <Image
               key={post.id}
               src={post.imageUrl}
               alt={post.author}
-              width={imageConfigs.width}
-              height={imageConfigs.height}
+              width={postConfigs.width}
+              height={postConfigs.height}
             />
           </div>
         ))}
       </div>
-      {isOpen && activeImageId && (
+      {isOpen && activePost && (
         <div>
           {/*TODO: add image modal based on id*/}
+          
         </div>
       )}
     </div>
