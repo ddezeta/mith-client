@@ -1,9 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import { Post } from "./types";
 import { PostModal } from "@/src/components/PostModal"
 import { POST_SIZE } from "./constants"
+import { PostsGrid } from "@/src/components/PostsGrid"
 
 export default function Portfolio() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,23 +46,7 @@ export default function Portfolio() {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Creative Portfolio</h2>
       <p className="text-gray-600">Our featured work.</p>
-      <div className="grid grid-cols-3 gap-1">
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            className="cursor-pointer"
-            onClick={() => openPost(post.id)}
-          >
-            <Image
-              key={post.id}
-              src={post.imageUrl}
-              alt={post.author}
-              width={POST_SIZE.width}
-              height={POST_SIZE.height}
-            />
-          </div>
-        ))}
-      </div>
+      <PostsGrid posts={posts} postSize={POST_SIZE} onOpen={openPost} ></PostsGrid>
       {isOpen && activePost && (
         <PostModal
           post={activePost}

@@ -2,13 +2,13 @@
 import Image from "next/image";
 import { Post, PostSize } from "@/src/app/(main)/portfolio/types"
 
-interface PostProps {
+interface PostModalProps {
   post: Post;
   postSize: PostSize;
   onClose: () => void;
 }
 
-export const PostModal = ({ post, postSize, onClose}: PostProps) => {
+export const PostModal = ({ post, postSize, onClose}: PostModalProps) => {
   return (
     <div
       className="fixed top-0 left-0 w-full h-full bg-slate-500/70 bg-opacity-80 flex justify-center items-center z-50"
