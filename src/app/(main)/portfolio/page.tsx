@@ -5,7 +5,7 @@ import { Post } from "./types";
 
 export default function Portfolio() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activePost, setActivePost] = useState({});
+  const [activePost, setActivePost] = useState<Post>({id: 0, imageUrl: "", author: ""});
 
   const posts: Post[] = [
     { id: 1, imageUrl: "/dz_content/djspike.png", author: "dezeta" },
@@ -39,11 +39,16 @@ export default function Portfolio() {
     console.log("clicked post", posts.find((post) => post.id === postId)?.imageUrl)
   }
 
+  const closePost = () => {
+    setIsOpen(false);
+    setActivePost({id: 0, imageUrl: "", author: ""});
+  }
+
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Creative Portfolio</h2>
       <p className="text-gray-600">
-        Your connected ad accounts and performance metrics will appear here.
+        Our featured work.
       </p>
       <div className="grid grid-cols-3 gap-1">
         {posts.map((post) => (
@@ -59,9 +64,29 @@ export default function Portfolio() {
         ))}
       </div>
       {isOpen && activePost && (
-        <div>
-          {/*TODO: add image modal based on id*/}
-          
+        <div 
+          className="fixed top-0 left-0 w-full h-full bg-slate-500/70 bg-opacity-80 flex justify-center items-center z-50"
+          onClick={closePost}
+        >
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="absolute top-2 right-2 text-white text-3xl"
+              onClick={closePost}
+            >
+              &times;
+            </button>
+            <Image
+              key={activePost.id}
+              src={activePost.imageUrl}
+              alt={activePost.author}
+              width={postConfigs.width}
+              height={postConfigs.height}
+            />
+             <div className="text-white text-center">
+              <p>Author: {activePost.author}</p>
+              <p>Contact: ...@gmail.com</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
