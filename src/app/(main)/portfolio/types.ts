@@ -3,3 +3,8 @@ export type Post = {
     imageUrl: string;
     author: string;
 }
+
+export type PostSize = {
+    width: number;
+    height: number;
+}

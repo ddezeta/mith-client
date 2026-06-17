@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Post } from "./types";
+import { PostModal } from "@/src/components/PostModal"
+import { POST_SIZE } from "./constants"
 
 export default function Portfolio() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,17 +22,13 @@ export default function Portfolio() {
     },
   ];
 
-  const postConfigs = {
-    width: 1012,
-    height: 1350
-  }
-
   const openPost = (postId: number) => {
     //check for post first
     const postConfig = posts.find((post) => post.id === postId)
     if(!postConfig){
       // nothing to open if the post is not found..
       // graceful result
+      console.error(`ERROR: Post with ID ${postId} not found.`)
       return;
     }
 
@@ -47,47 +45,30 @@ export default function Portfolio() {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Creative Portfolio</h2>
-      <p className="text-gray-600">
-        Our featured work.
-      </p>
+      <p className="text-gray-600">Our featured work.</p>
       <div className="grid grid-cols-3 gap-1">
         {posts.map((post) => (
-          <div key={post.id} className="cursor-pointer" onClick={() => openPost(post.id)}>
+          <div
+            key={post.id}
+            className="cursor-pointer"
+            onClick={() => openPost(post.id)}
+          >
             <Image
               key={post.id}
               src={post.imageUrl}
               alt={post.author}
-              width={postConfigs.width}
-              height={postConfigs.height}
+              width={POST_SIZE.width}
+              height={POST_SIZE.height}
             />
           </div>
         ))}
       </div>
       {isOpen && activePost && (
-        <div 
-          className="fixed top-0 left-0 w-full h-full bg-slate-500/70 bg-opacity-80 flex justify-center items-center z-50"
-          onClick={closePost}
-        >
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="absolute top-2 right-2 text-white text-3xl"
-              onClick={closePost}
-            >
-              &times;
-            </button>
-            <Image
-              key={activePost.id}
-              src={activePost.imageUrl}
-              alt={activePost.author}
-              width={postConfigs.width}
-              height={postConfigs.height}
-            />
-             <div className="text-white text-center">
-              <p>Author: {activePost.author}</p>
-              <p>Contact: ...@gmail.com</p>
-            </div>
-          </div>
-        </div>
+        <PostModal
+          post={activePost}
+          postSize={POST_SIZE}
+          onClose={closePost}
+        ></PostModal>
       )}
     </div>
   );
