@@ -10,7 +10,7 @@ const HEADER_LOGO = {
   author: "dezeta",
 };
 
-const NAV_ITEMS = [{ href: "/portfolio", label: "Portfolio", icon: Menu }];
+const NAV_ITEMS = [{ href: "/gallery", label: "Gallery", icon: Menu }];
 
 interface MainLayoutProps {
   children: React.ReactNode;
