@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Post, PostSize } from "@/src/app/(main)/portfolio/types"
+import { Post, PostSize } from "@/src/app/(main)/gallery/types"
 
 interface PostModalProps {
   post: Post;
