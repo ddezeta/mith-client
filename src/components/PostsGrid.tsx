@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Post, PostSize } from "@/src/app/(main)/portfolio/types"
+import { Post, PostSize } from "@/src/app/(main)/gallery/types"
 
 interface PostsGridProps {
     posts: Post[];
@@ -14,7 +14,7 @@ export const PostsGrid = ({posts, postSize, onOpen}: PostsGridProps) => {
       {posts.map((post) => (
         <div
           key={post.id}
-          className="cursor-pointer"
+          className="relative aspect-square cursor-pointer"
           onClick={() => onOpen(post.id)}
         >
           <Image
@@ -23,6 +23,7 @@ export const PostsGrid = ({posts, postSize, onOpen}: PostsGridProps) => {
             alt={post.author}
             width={postSize.width}
             height={postSize.height}
+            className="h-full w-full object-cover"
           />
         </div>
       ))}

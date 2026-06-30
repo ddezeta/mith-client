@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { Post } from "./types";
+import { Post } from "@/src/app/(main)/gallery/types";
 import { PostModal } from "@/src/components/PostModal"
-import { POST_SIZE } from "./constants"
+import { POST_SIZE } from "@/src/app/(main)/gallery/constants"
 import { PostsGrid } from "@/src/components/PostsGrid"
-import { POSTS } from "./data"
+import { POSTS } from "@/src/app/(main)/gallery/data"
 
-export default function Portfolio() {
+export default function Gallery() {
   const [isOpen, setIsOpen] = useState(false);
   const [activePost, setActivePost] = useState<Post>({id: 0, imageUrl: "", author: ""});
 
@@ -31,7 +31,7 @@ export default function Portfolio() {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Creative Portfolio</h2>
+      <h2 className="text-2xl font-bold mb-4">Gallery</h2>
       <p className="text-gray-600">Our featured work.</p>
       <PostsGrid posts={POSTS} postSize={POST_SIZE} onOpen={openPost} ></PostsGrid>
       {isOpen && activePost && activePost.id !== 0 && (
