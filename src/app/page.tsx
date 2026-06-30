@@ -1,7 +1,7 @@
-import Portfolio from "@/src/components/Portfolio"
+import Gallery from "@/src/components/Gallery"
 
 export default function Home() {
-    return (
-        <Portfolio />
-    )
+  return (
+      <Gallery />
+  );
 }

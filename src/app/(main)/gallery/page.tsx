@@ -1,8 +1,8 @@
 "use client";
-import Portfolio from "@/src/components/Portfolio"
+import Gallery from "@/src/components/Gallery"
 
 export default function Galerry() {
   return (
-    <Portfolio />
+    <Gallery />
   );
 }

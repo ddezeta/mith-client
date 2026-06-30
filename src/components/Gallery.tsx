@@ -6,7 +6,7 @@ import { POST_SIZE } from "@/src/app/(main)/gallery/constants"
 import { PostsGrid } from "@/src/components/PostsGrid"
 import { POSTS } from "@/src/app/(main)/gallery/data"
 
-export default function Portfolio() {
+export default function Gallery() {
   const [isOpen, setIsOpen] = useState(false);
   const [activePost, setActivePost] = useState<Post>({id: 0, imageUrl: "", author: ""});
 
